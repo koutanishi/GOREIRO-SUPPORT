@@ -533,7 +533,7 @@
     border: 1px solid var(--blue-mid);
     background: var(--off-white);
     font-family: 'Noto Sans JP', sans-serif;
-    font-size: 13px;
+    font-size: 16px;
     color: var(--text);
     outline: none;
     transition: border-color 0.2s, background 0.2s;
@@ -622,10 +622,11 @@
 
   .success-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
+    font-size: clamp(28px, 7vw, 36px);
     letter-spacing: 0.08em;
     color: var(--blue);
     margin-bottom: 12px;
+    line-height: 1.2;
   }
 
   .success-body {
@@ -915,7 +916,7 @@
         <div class="success-icon-box">
           <div class="success-check">✓</div>
         </div>
-        <div class="success-title">申し込み完了！</div>
+        <div class="success-title">申し込み<br>ありがとうございます！</div>
         <div class="success-body">
           ありがとうございます。<br>
           2〜3営業日以内にご連絡します。
