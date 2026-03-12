@@ -3,314 +3,397 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ゴレイロサポート サービスメニュー</title>
+<title>ゴレイロサポート</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Bebas+Neue&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --navy: #0a1628;
-    --blue: #1a4fd6;
-    --cyan: #00c4ff;
-    --white: #f8faff;
-    --gray: #8a9bb5;
-    --light: #e8eef8;
+    --blue: #0057FF;
+    --blue-dark: #003DB3;
+    --blue-light: #E8F0FF;
+    --blue-mid: #C0D4FF;
+    --white: #FFFFFF;
+    --off-white: #F4F7FF;
+    --text: #0a1628;
+    --text-mid: #3a4a6b;
+    --text-light: #7a8fbb;
+    --accent: #00C4FF;
   }
 
   body {
-    background: var(--navy);
-    color: var(--white);
+    background: var(--white);
+    color: var(--text);
     font-family: 'Noto Sans JP', sans-serif;
     min-height: 100vh;
-    overflow-x: hidden;
   }
 
-  /* Background grid */
-  body::before {
+  /* PAGE SWITCHING */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ===================== MENU PAGE ===================== */
+
+  .hero {
+    background: var(--blue);
+    position: relative;
+    overflow: hidden;
+    padding: 64px 32px 72px;
+  }
+
+  .hero::before {
     content: '';
-    position: fixed;
+    position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(26,79,214,0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(26,79,214,0.08) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-    z-index: 0;
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
   }
 
-  .container {
-    max-width: 860px;
+  .hero::after {
+    content: 'GK';
+    position: absolute;
+    right: -20px;
+    bottom: -40px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 240px;
+    color: rgba(255,255,255,0.05);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .hero-inner {
+    max-width: 800px;
     margin: 0 auto;
-    padding: 60px 32px;
     position: relative;
     z-index: 1;
+    animation: fadeUp 0.7s ease both;
   }
 
-  /* Header */
-  .header {
-    text-align: center;
-    margin-bottom: 64px;
-    animation: fadeUp 0.8s ease both;
-  }
-
-  .tag {
+  .hero-tag {
     display: inline-block;
     font-family: 'Oswald', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    color: var(--cyan);
-    border: 1px solid rgba(0,196,255,0.4);
-    padding: 6px 16px;
-    margin-bottom: 24px;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 5px 14px;
+    margin-bottom: 28px;
     text-transform: uppercase;
   }
 
-  .title {
+  .hero-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(52px, 10vw, 88px);
-    line-height: 0.9;
+    font-size: clamp(64px, 14vw, 110px);
+    line-height: 0.88;
     letter-spacing: 0.04em;
-    margin-bottom: 8px;
-    background: linear-gradient(135deg, #fff 0%, var(--cyan) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--white);
+    margin-bottom: 6px;
   }
 
-  .subtitle {
+  .hero-title span { color: var(--accent); }
+
+  .hero-date {
+    font-family: 'Oswald', sans-serif;
     font-size: 13px;
-    color: var(--gray);
-    letter-spacing: 0.15em;
-    margin-bottom: 32px;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.5);
+    margin-top: 16px;
   }
 
-  .concept {
-    font-size: 15px;
-    color: var(--light);
-    line-height: 1.9;
-    max-width: 520px;
-    margin: 0 auto;
-    padding: 24px;
-    border-left: 3px solid var(--cyan);
-    background: rgba(26,79,214,0.08);
-    text-align: left;
+  .pain {
+    background: var(--white);
+    padding: 64px 32px;
+    border-bottom: 1px solid var(--blue-mid);
   }
 
-  .concept strong {
-    color: var(--cyan);
-    font-weight: 700;
-  }
+  .pain-inner { max-width: 800px; margin: 0 auto; }
 
-  /* Section */
-  .section-label {
+  .section-eyebrow {
     font-family: 'Oswald', sans-serif;
     font-size: 10px;
     letter-spacing: 0.4em;
-    color: var(--cyan);
+    color: var(--blue);
     text-transform: uppercase;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     gap: 12px;
   }
 
-  .section-label::after {
+  .section-eyebrow::after {
     content: '';
     flex: 1;
     height: 1px;
-    background: rgba(0,196,255,0.2);
+    background: var(--blue-mid);
   }
 
-  /* Service Cards */
-  .services {
+  .pain-grid {
     display: grid;
-    gap: 20px;
-    margin-bottom: 56px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+    margin-bottom: 36px;
   }
 
-  .card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 32px;
+  .pain-item {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    background: var(--off-white);
+    border-left: 3px solid var(--blue);
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.6;
+  }
+
+  .pain-resolve {
+    background: var(--blue);
+    padding: 32px 36px;
     position: relative;
     overflow: hidden;
-    transition: all 0.3s ease;
-    animation: fadeUp 0.8s ease both;
+  }
+
+  .pain-resolve::after {
+    content: '';
+    position: absolute;
+    right: -30px; top: -30px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .pain-resolve-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    color: var(--white);
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+    line-height: 1.1;
+  }
+
+  .pain-resolve-title span { color: var(--accent); }
+
+  .pain-resolve-body {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.9;
+  }
+
+  .services-section {
+    background: var(--off-white);
+    padding: 64px 32px;
+  }
+
+  .services-inner { max-width: 800px; margin: 0 auto; }
+  .services-grid { display: grid; gap: 14px; }
+
+  .card {
+    background: var(--white);
+    border: 1px solid var(--blue-mid);
+    padding: 28px 28px 22px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s ease;
   }
 
   .card::before {
     content: '';
     position: absolute;
     top: 0; left: 0;
-    width: 4px;
-    height: 100%;
+    width: 100%; height: 4px;
     background: var(--blue);
-    transition: width 0.3s ease;
   }
 
   .card:hover {
-    border-color: rgba(0,196,255,0.3);
-    background: rgba(26,79,214,0.08);
-    transform: translateX(4px);
-  }
-
-  .card:hover::before {
-    width: 6px;
-    background: var(--cyan);
+    box-shadow: 0 8px 32px rgba(0,87,255,0.1);
+    transform: translateY(-2px);
+    border-color: var(--blue);
   }
 
   .card-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 16px;
-    gap: 16px;
+    gap: 12px;
+    margin-bottom: 12px;
     flex-wrap: wrap;
   }
 
   .card-name {
     font-family: 'Oswald', sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 600;
-    letter-spacing: 0.05em;
-    color: var(--white);
+    letter-spacing: 0.04em;
+    color: var(--text);
   }
 
   .card-price {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    color: var(--cyan);
-    letter-spacing: 0.05em;
+    font-size: 26px;
+    color: var(--blue);
+    letter-spacing: 0.04em;
     white-space: nowrap;
   }
 
-  .card-price span {
+  .card-price small {
     font-family: 'Noto Sans JP', sans-serif;
-    font-size: 12px;
-    color: var(--gray);
+    font-size: 11px;
+    color: var(--text-light);
     font-weight: 400;
-    letter-spacing: 0.05em;
   }
 
   .card-desc {
-    font-size: 13px;
-    color: var(--gray);
-    line-height: 1.8;
-    margin-bottom: 16px;
+    font-size: 12px;
+    color: var(--text-mid);
+    line-height: 1.85;
+    margin-bottom: 14px;
   }
 
-  .card-features {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 
-  .feature-tag {
-    font-size: 11px;
-    color: var(--light);
-    background: rgba(26,79,214,0.25);
-    border: 1px solid rgba(26,79,214,0.4);
-    padding: 4px 10px;
-    letter-spacing: 0.05em;
+  .tag-item {
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    color: var(--blue);
+    background: var(--blue-light);
+    border: 1px solid var(--blue-mid);
+    padding: 3px 10px;
   }
 
   .badge {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 14px; right: 14px;
     font-family: 'Oswald', sans-serif;
     font-size: 9px;
-    letter-spacing: 0.25em;
-    padding: 4px 10px;
+    letter-spacing: 0.2em;
+    padding: 3px 10px;
     text-transform: uppercase;
   }
 
-  .badge-core {
-    background: var(--cyan);
-    color: var(--navy);
+  .badge-core { background: var(--blue); color: var(--white); }
+  .badge-soon { background: var(--blue-light); color: var(--blue); border: 1px solid var(--blue-mid); }
+
+  .limit-box {
+    background: #FFF5F5;
+    border: 1px solid #FFB3B3;
+    border-left: 3px solid #FF3B3B;
+    padding: 10px 14px;
+    margin-bottom: 14px;
   }
 
-  .badge-new {
-    background: rgba(255,200,0,0.15);
-    color: #ffd600;
-    border: 1px solid rgba(255,214,0,0.3);
+  .limit-box-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: #CC0000;
+    margin-bottom: 4px;
   }
 
-  /* Flow */
-  .flow {
-    margin-bottom: 56px;
-    animation: fadeUp 0.8s 0.3s ease both;
+  .limit-box-body { font-size: 11px; color: #993333; line-height: 1.7; }
+
+  .watermark {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 10;
+    transform: rotate(-20deg);
   }
+
+  .watermark span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    letter-spacing: 0.15em;
+    color: rgba(0,87,255,0.08);
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .flow-section {
+    background: var(--white);
+    padding: 64px 32px;
+    border-top: 1px solid var(--blue-mid);
+    border-bottom: 1px solid var(--blue-mid);
+  }
+
+  .flow-inner { max-width: 800px; margin: 0 auto; }
 
   .flow-steps {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    position: relative;
   }
 
   .flow-step {
-    text-align: center;
     padding: 28px 16px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.06);
+    text-align: center;
+    border: 1px solid var(--blue-mid);
     position: relative;
+    background: var(--white);
   }
 
   .flow-step:not(:last-child)::after {
     content: '→';
     position: absolute;
-    right: -12px;
+    right: -13px;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--cyan);
-    font-size: 18px;
+    color: var(--blue);
+    font-size: 16px;
     z-index: 2;
+    background: var(--white);
+    padding: 2px 0;
   }
 
   .flow-num {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
-    color: rgba(0,196,255,0.2);
+    font-size: 40px;
+    color: var(--blue-mid);
     line-height: 1;
     margin-bottom: 8px;
   }
 
-  .flow-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 6px;
-  }
+  .flow-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .flow-desc { font-size: 10px; color: var(--text-light); line-height: 1.6; }
 
-  .flow-desc {
-    font-size: 11px;
-    color: var(--gray);
-    line-height: 1.6;
-  }
-
-  /* CTA */
-  .cta {
+  .cta-section {
+    background: var(--blue);
+    padding: 72px 32px;
     text-align: center;
-    padding: 48px 32px;
-    background: linear-gradient(135deg, rgba(26,79,214,0.2), rgba(0,196,255,0.08));
-    border: 1px solid rgba(0,196,255,0.2);
-    animation: fadeUp 0.8s 0.4s ease both;
+    position: relative;
+    overflow: hidden;
   }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .cta-inner { position: relative; z-index: 1; }
 
   .cta-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
-    letter-spacing: 0.1em;
-    margin-bottom: 8px;
-    color: var(--cyan);
+    font-size: 52px;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    margin-bottom: 12px;
   }
+
+  .cta-title span { color: var(--accent); }
 
   .cta-sub {
     font-size: 13px;
-    color: var(--gray);
-    margin-bottom: 28px;
-    line-height: 1.8;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.9;
+    margin-bottom: 32px;
   }
 
   .cta-btn {
@@ -319,235 +402,499 @@
     font-size: 14px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    padding: 16px 48px;
-    background: var(--cyan);
-    color: var(--navy);
+    padding: 18px 56px;
+    background: var(--white);
+    color: var(--blue);
     font-weight: 700;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    cursor: pointer;
     border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
   }
 
   .cta-btn:hover {
-    background: var(--white);
+    background: var(--accent);
+    color: var(--white);
     transform: translateY(-2px);
   }
 
   .cta-note {
     font-size: 11px;
-    color: var(--gray);
+    color: rgba(255,255,255,0.4);
     margin-top: 16px;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
   }
 
-  /* Footer */
-  .footer {
-    text-align: center;
-    margin-top: 48px;
-    padding-top: 32px;
-    border-top: 1px solid rgba(255,255,255,0.06);
+  /* ===================== FORM PAGE ===================== */
+
+  .form-header {
+    background: var(--blue);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .form-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .form-header-inner {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--white); }
+
+  .form-header-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .form-header-title span { color: var(--accent); }
+
+  .form-header-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.08em;
+    line-height: 1.7;
+  }
+
+  .form-wrap {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  .form-card {
+    background: var(--white);
+    border: 1px solid var(--blue-mid);
+    padding: 40px;
+    position: relative;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .form-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 4px;
+    background: var(--blue);
+  }
+
+  .form-group { margin-bottom: 24px; }
+
+  label {
+    display: block;
+    font-family: 'Oswald', sans-serif;
     font-size: 11px;
-    color: var(--gray);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.2em;
+    color: var(--blue);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  label .required { color: #FF3B3B; margin-left: 4px; font-size: 10px; }
+
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--blue-mid);
+    background: var(--off-white);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    border-radius: 0;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  textarea:focus {
+    border-color: var(--blue);
+    background: var(--white);
+  }
+
+  textarea { resize: vertical; min-height: 120px; line-height: 1.7; }
+
+  .submit-btn {
+    width: 100%;
+    padding: 18px;
+    background: var(--blue);
+    color: var(--white);
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 8px;
+  }
+
+  .submit-btn:hover {
+    background: var(--blue-dark);
+    transform: translateY(-2px);
+  }
+
+  .form-note {
+    font-size: 11px;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-top: 16px;
+    text-align: center;
+  }
+
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 48px 24px;
+  }
+
+  .success-icon { font-size: 48px; margin-bottom: 16px; }
+
+  .success-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 0.08em;
+    color: var(--blue);
+    margin-bottom: 12px;
+  }
+
+  .success-body {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.9;
+  }
+
+  .divider { height: 1px; background: var(--blue-mid); margin: 28px 0; }
+
+  .info-box {
+    background: var(--blue-light);
+    border-left: 3px solid var(--blue);
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    font-size: 12px;
+    color: var(--text-mid);
+    line-height: 1.8;
+  }
+
+  .info-box strong {
+    color: var(--blue);
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: #001466;
+    padding: 24px 32px;
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
   }
 
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
-  .card:nth-child(1) { animation-delay: 0.1s; }
-  .card:nth-child(2) { animation-delay: 0.2s; }
-  .card:nth-child(3) { animation-delay: 0.3s; }
-  .card:nth-child(4) { animation-delay: 0.4s; }
 </style>
 </head>
 <body>
-<div class="container">
 
-  <!-- Header -->
-  <div class="header">
-    <div class="tag">Fリーグ現役ゴレイロによる専門サポート</div>
-    <div class="title">GOREIRO<br>SUPPORT</div>
-    <div class="subtitle">2026年4月 — サービス開始</div>
-    <div class="concept">
-      <div style="margin-bottom:20px; color:#8a9bb5; font-size:13px; letter-spacing:0.1em;">こんな悩み、ありませんか？</div>
-      <div style="display:grid; gap:10px; margin-bottom:24px;">
-        <div style="display:flex; align-items:flex-start; gap:10px;">
-          <span style="color:#00c4ff; font-size:11px; margin-top:3px; flex-shrink:0;">▸</span>
-          <span>ゴレイロ専門のコーチがいない</span>
-        </div>
-        <div style="display:flex; align-items:flex-start; gap:10px;">
-          <span style="color:#00c4ff; font-size:11px; margin-top:3px; flex-shrink:0;">▸</span>
-          <span>クリニックは都心ばかり。遠くて行けない</span>
-        </div>
-        <div style="display:flex; align-items:flex-start; gap:10px;">
-          <span style="color:#00c4ff; font-size:11px; margin-top:3px; flex-shrink:0;">▸</span>
-          <span>チームにゴレイロコーチがいない。フィールドのコーチに相談しても感覚がズレる</span>
-        </div>
-        <div style="display:flex; align-items:flex-start; gap:10px;">
-          <span style="color:#00c4ff; font-size:11px; margin-top:3px; flex-shrink:0;">▸</span>
-          <span>失点した夜、誰にも相談できずに一人で抱える</span>
-        </div>
-        <div style="display:flex; align-items:flex-start; gap:10px;">
-          <span style="color:#00c4ff; font-size:11px; margin-top:3px; flex-shrink:0;">▸</span>
-          <span>YouTubeや月1のクリニックだけで、孤独に練習している</span>
-        </div>
-        <div style="display:flex; align-items:flex-start; gap:10px;">
-          <span style="color:#00c4ff; font-size:11px; margin-top:3px; flex-shrink:0;">▸</span>
-          <span>次のクリニックまでまた3週間。改善できないまま試合が来る</span>
-        </div>
+<!-- ========== PAGE 1: MENU ========== -->
+<div id="page-menu" class="page active">
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">Fリーグ現役ゴレイロによる専門サポート</div>
+      <div class="hero-title">GOREIRO<br><span>SUPPORT</span></div>
+      <div class="hero-date">2026年4月 — サービス開始</div>
+    </div>
+  </div>
+
+  <div class="pain">
+    <div class="pain-inner">
+      <div class="section-eyebrow">こんな悩みありませんか</div>
+      <div class="pain-grid">
+        <div class="pain-item">ゴレイロ専門のコーチがいない</div>
+        <div class="pain-item">クリニックは都心ばかりで遠くて行けない</div>
+        <div class="pain-item">フィールドのコーチに相談しても感覚がズレる</div>
+        <div class="pain-item">失点した夜、誰にも相談できない</div>
+        <div class="pain-item">YouTubeと月1クリニックだけで孤独に練習してる</div>
+        <div class="pain-item">改善できないまま、また試合が来る</div>
       </div>
-      <div style="border-top:1px solid rgba(0,196,255,0.2); padding-top:20px;">
-        その悩み、<strong>全部わかります。</strong><br>
-        だから作りました。<br>
-        現役Fリーガーが、どこにいても、試合後すぐ、<strong>あなたの力になります。</strong>
+      <div class="pain-resolve">
+        <div class="pain-resolve-title">環境のせいで、<br><span>止まってほしくない。</span></div>
+        <div class="pain-resolve-body">
+          才能があっても、熱量があっても、環境がないだけで成長が止まる。<br>
+          そんな「機会がない」をなくしたくて、この場所を作りました。
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Services -->
-  <div class="section-label">Services</div>
-  <div class="services">
+  <div class="services-section">
+    <div class="services-inner">
+      <div class="section-eyebrow">Services</div>
+      <div class="services-grid">
 
-    <div class="card">
-      <div class="badge badge-core">Core</div>
-      <div class="card-header">
-        <div class="card-name">🎯 オンラインコーチング</div>
-        <div class="card-price">月額 5,000円<span> / 月</span></div>
-      </div>
-      <div style="background:rgba(255,80,80,0.08); border:1px solid rgba(255,80,80,0.25); padding:12px 16px; margin-bottom:16px;">
-        <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-          <span style="font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:0.2em; color:#ff6b6b;">⚠ 限定10名 — 早期サポーター価格</span>
+        <div class="card">
+          <div class="badge badge-core">Core</div>
+          <div class="card-header">
+            <div class="card-name">🎯 オンラインコーチング</div>
+            <div class="card-price">月額 5,000円<small> / 月</small></div>
+          </div>
+          <div class="limit-box">
+            <div class="limit-box-title">⚠ 限定10名 — 早期サポーター価格</div>
+            <div class="limit-box-body">定員に達し次第、募集終了。それ以降は価格変更または募集なしになる可能性があります。</div>
+          </div>
+          <div class="card-desc">
+            試合後すぐ動画を送って相談できる、現役FリーガーによるマンツーマンサポートⅠ技術だけでなく思考・判断の部分まで一緒に言語化します。
+          </div>
+          <div class="card-tags">
+            <span class="tag-item">チャット相談し放題</span>
+            <span class="tag-item">動画分析・フィードバック</span>
+            <span class="tag-item">トレーニングメニュー作成</span>
+            <span class="tag-item">失点・セーブ分析</span>
+            <span class="tag-item">Fリーグ映像解説</span>
+          </div>
         </div>
-        <div style="font-size:12px; color:#8a9bb5; line-height:1.7;">
-          定員に達し次第、募集終了。<br>それ以降は価格変更または募集なしになる可能性があります。
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-name">🏃 ゴレイロクリニック</div>
+            <div class="card-price">2,000〜3,000円<small> / 回</small></div>
+          </div>
+          <div class="card-desc">
+            関東エリアで月1〜2回開催。テーマを決めて集中的にトレーニング。初めての方でも参加しやすい少人数制で実施します。
+          </div>
+          <div class="card-tags">
+            <span class="tag-item">関東エリア開催</span>
+            <span class="tag-item">月1〜2回</span>
+            <span class="tag-item">少人数制</span>
+            <span class="tag-item">テーマ別トレーニング</span>
+          </div>
         </div>
-      </div>
-      <div class="card-desc">
-        試合後すぐ動画を送って相談できる、現役Fリーガーによるマンツーマンサポート。<br>
-        技術だけでなく思考・判断の部分まで一緒に言語化します。
-      </div>
-      <div class="card-features">
-        <span class="feature-tag">チャット相談し放題</span>
-        <span class="feature-tag">動画分析・フィードバック</span>
-        <span class="feature-tag">トレーニングメニュー作成</span>
-        <span class="feature-tag">失点・セーブ分析</span>
-        <span class="feature-tag">Fリーグ映像解説</span>
-      </div>
-    </div>
 
-    <div class="card">
-      <div class="card-header">
-        <div class="card-name">🏃 ゴレイロクリニック</div>
-        <div class="card-price">2,000〜3,000円<span> / 回</span></div>
-      </div>
-      <div class="card-desc">
-        関東エリアで月1〜2回開催。テーマを決めて集中的にトレーニング。<br>
-        初めての方でも参加しやすい少人数制で実施します。
-      </div>
-      <div class="card-features">
-        <span class="feature-tag">関東エリア開催</span>
-        <span class="feature-tag">月1〜2回</span>
-        <span class="feature-tag">少人数制</span>
-        <span class="feature-tag">テーマ別トレーニング</span>
-      </div>
-    </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-name">💪 パーソナルトレーニング</div>
+            <div class="card-price">5,000〜8,000円<small> / 回</small></div>
+          </div>
+          <div class="card-desc">
+            完全個別・対面でのパーソナル指導。あなたの課題だけに集中します。月3〜4名限定。関東エリアで実施。
+          </div>
+          <div class="card-tags">
+            <span class="tag-item">完全個別対応</span>
+            <span class="tag-item">月3〜4名限定</span>
+            <span class="tag-item">関東エリア</span>
+          </div>
+        </div>
 
-    <div class="card">
-      <div class="card-header">
-        <div class="card-name">💪 パーソナルトレーニング</div>
-        <div class="card-price">5,000〜8,000円<span> / 回</span></div>
-      </div>
-      <div class="card-desc">
-        完全個別・対面でのパーソナル指導。あなたの課題だけに集中します。<br>
-        月3〜4名限定。関東エリアで実施。
-      </div>
-      <div class="card-features">
-        <span class="feature-tag">完全個別対応</span>
-        <span class="feature-tag">月3〜4名限定</span>
-        <span class="feature-tag">関東エリア</span>
-      </div>
-    </div>
+        <div class="card" style="opacity:0.7;">
+          <div class="watermark"><span>COMING SOON</span></div>
+          <div class="badge badge-soon">Coming Soon</div>
+          <div class="card-header">
+            <div class="card-name">🤝 オンラインコミュニティ</div>
+            <div class="card-price">月額 1,000〜2,000円<small> / 月</small></div>
+          </div>
+          <div class="card-desc">
+            ゴレイロ同士が繋がれるオンラインサロン。練習メニューのシェア、試合映像の共有、Q&Aなど。孤独な練習から卒業できます。
+          </div>
+          <div class="card-tags">
+            <span class="tag-item">映像シェア</span>
+            <span class="tag-item">Q&A</span>
+            <span class="tag-item">練習メニュー共有</span>
+            <span class="tag-item">ゴレイロコミュニティ</span>
+          </div>
+        </div>
 
-    <div class="card" style="position:relative; overflow:hidden;">
-      <div style="
-        position:absolute; inset:0;
-        display:flex; align-items:center; justify-content:center;
-        pointer-events:none; z-index:10;
-        transform:rotate(-25deg);
-      ">
-        <span style="
-          font-family:'Bebas Neue',sans-serif;
-          font-size:72px;
-          letter-spacing:0.15em;
-          color:rgba(0,196,255,0.12);
-          white-space:nowrap;
-          user-select:none;
-        ">COMING SOON</span>
-      </div>
-      <div class="badge badge-new">Coming Soon</div>
-      <div class="card-header">
-        <div class="card-name">🤝 オンラインコミュニティ</div>
-        <div class="card-price">月額 1,000〜2,000円<span> / 月</span></div>
-      </div>
-      <div class="card-desc">
-        ゴレイロ同士が繋がれるオンラインサロン。<br>
-        練習メニューのシェア、試合映像の共有、Q&Aなど。孤独な練習から卒業できます。
-      </div>
-      <div class="card-features">
-        <span class="feature-tag">映像シェア</span>
-        <span class="feature-tag">Q&A</span>
-        <span class="feature-tag">練習メニュー共有</span>
-        <span class="feature-tag">ゴレイロコミュニティ</span>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Flow -->
-  <div class="flow">
-    <div class="section-label">How to Start</div>
-    <div class="flow-steps">
-      <div class="flow-step">
-        <div class="flow-num">01</div>
-        <div class="flow-title">申し込み</div>
-        <div class="flow-desc">下のボタンからフォームへ</div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">02</div>
-        <div class="flow-title">ZOOMで話す</div>
-        <div class="flow-desc">質問・相談なんでもOK</div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">03</div>
-        <div class="flow-title">検討</div>
-        <div class="flow-desc">じっくり考えてください</div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">04</div>
-        <div class="flow-title">サポートスタート</div>
-        <div class="flow-desc">試合後すぐ相談できる環境へ</div>
       </div>
     </div>
   </div>
 
-  <!-- CTA -->
-  <div class="cta">
-    <div class="cta-title">まず説明会に来てください</div>
-    <div class="cta-sub">
-      サービスの詳細・料金・よくある質問など、<br>
-      ZOOMで直接説明します。気軽に参加してください。
+  <div class="flow-section">
+    <div class="flow-inner">
+      <div class="section-eyebrow">How to Start</div>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-num">01</div>
+          <div class="flow-title">申し込み</div>
+          <div class="flow-desc">下のボタンからフォームへ</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">02</div>
+          <div class="flow-title">ZOOMで話す</div>
+          <div class="flow-desc">質問・相談なんでもOK</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">03</div>
+          <div class="flow-title">検討</div>
+          <div class="flow-desc">じっくり考えてください</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">04</div>
+          <div class="flow-title">サポートスタート</div>
+          <div class="flow-desc">試合後すぐ相談できる環境へ</div>
+        </div>
+      </div>
     </div>
-    <button class="cta-btn" onclick="alert('申し込みフォームのURLをここに設定してください')">ZOOM説明会に参加する →</button>
-    <div class="cta-note">※ 参加無料・申し込み後に日程をご連絡します</div>
+  </div>
+
+  <div class="cta-section">
+    <div class="cta-inner">
+      <div class="cta-title">説明だけでも、<span>ぜひ。</span></div>
+      <div class="cta-sub">
+        ゴレイロサポートの内容・料金・進め方について、<br>
+        ZOOMで1対1でお話しします。聞くだけでも大丈夫です。
+      </div>
+      <button class="cta-btn" onclick="showForm()">1on1説明を申し込む →</button>
+      <div class="cta-note">※ 参加無料・申し込み後に日程をご連絡します</div>
+    </div>
   </div>
 
   <div class="footer">
-    GOREIRO SUPPORT — Fリーグ現役ゴレイロによる専門オンラインサポート — 2026 APRIL LAUNCH
+    Goreiro Support — Fリーグ現役ゴレイロによる専門オンラインサポート — 2026 April Launch
   </div>
 
 </div>
+
+<!-- ========== PAGE 2: FORM ========== -->
+<div id="page-form" class="page">
+
+  <div class="form-header">
+    <div class="form-header-inner">
+      <button class="back-link" onclick="showMenu()">← サービス一覧に戻る</button>
+      <div class="form-header-title">1on1<br><span>説明</span></div>
+      <div class="form-header-sub">申し込みフォーム — 参加無料 / 申し込み後に日程をご連絡します</div>
+    </div>
+  </div>
+
+  <div class="form-wrap">
+    <div class="form-card">
+
+      <div class="info-box">
+        <strong>この1on1について</strong>
+        ゴレイロサポートのサービス内容・料金・進め方について、ZOOMで1対1でお話しします。申し込み後、日程調整のご連絡をします。説明を聞くだけでもOKです。
+      </div>
+
+      <form id="entry-form" action="https://formspree.io/f/mdawzkod" method="POST">
+        <input type="hidden" name="_replyto" value="nishi24.official@gmail.com">
+        <input type="hidden" name="_subject" value="【ゴレイロサポート】1on1説明 申し込み">
+
+        <div class="form-group">
+          <label>お名前 <span class="required">必須</span></label>
+          <input type="text" name="name" placeholder="例：山田 太郎" required>
+        </div>
+
+        <div class="form-group">
+          <label>メールアドレス <span class="required">必須</span></label>
+          <input type="email" name="email" placeholder="例：example@gmail.com" required>
+        </div>
+
+        <div class="form-group">
+          <label>質問・悩み・要望など（任意）</label>
+          <textarea name="message" placeholder="今困っていること、聞いてみたいこと、なんでも書いてください"></textarea>
+        </div>
+
+        <div class="divider"></div>
+
+        <button type="submit" class="submit-btn">申し込む →</button>
+        <div class="form-note">申し込み後、2〜3営業日以内にご連絡します</div>
+      </form>
+
+      <div class="success-msg" id="success-msg">
+        <div class="success-icon">✅</div>
+        <div class="success-title">申し込み完了！</div>
+        <div class="success-body">
+          ありがとうございます。<br>
+          2〜3営業日以内にご連絡します。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    Goreiro Support — 2026 April Launch
+  </div>
+
+</div>
+
+<script>
+  function showForm() {
+    document.getElementById('page-menu').classList.remove('active');
+    document.getElementById('page-form').classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function showMenu() {
+    document.getElementById('page-form').classList.remove('active');
+    document.getElementById('page-menu').classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  const form = document.getElementById('entry-form');
+  const successMsg = document.getElementById('success-msg');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const data = new FormData(form);
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        successMsg.style.display = 'block';
+      } else {
+        alert('送信に失敗しました。時間をおいて再度お試しください。');
+      }
+    } catch(err) {
+      alert('送信に失敗しました。時間をおいて再度お試しください。');
+    }
+  });
+</script>
+
 </body>
 </html>
