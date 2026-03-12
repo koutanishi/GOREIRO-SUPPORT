@@ -166,11 +166,12 @@
 
   .pain-resolve-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 40px;
+    font-size: clamp(28px, 6vw, 40px);
     color: var(--white);
     letter-spacing: 0.06em;
     margin-bottom: 10px;
-    line-height: 1.1;
+    line-height: 1.15;
+    white-space: nowrap;
   }
 
   .pain-resolve-title span { color: var(--accent); }
@@ -381,10 +382,11 @@
 
   .cta-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 52px;
+    font-size: clamp(36px, 8vw, 52px);
     letter-spacing: 0.08em;
     color: var(--white);
     margin-bottom: 12px;
+    line-height: 1.1;
   }
 
   .cta-title span { color: var(--accent); }
@@ -581,7 +583,42 @@
     padding: 48px 24px;
   }
 
+  .card-icon {
+    display: inline-block;
+    font-family: 'Oswald', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 3px 7px;
+    margin-right: 4px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+
+  .icon-coach { background: var(--blue); color: var(--white); }
+  .icon-clinic { background: var(--text); color: var(--white); }
+  .icon-personal { background: var(--blue-dark); color: var(--white); }
+  .icon-community { background: var(--text-light); color: var(--white); }
+
   .success-icon { font-size: 48px; margin-bottom: 16px; }
+
+  .success-icon-box {
+    width: 72px;
+    height: 72px;
+    background: var(--blue);
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .success-check {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    color: var(--white);
+    line-height: 1;
+  }
 
   .success-title {
     font-family: 'Bebas Neue', sans-serif;
@@ -635,6 +672,40 @@
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
+  /* ===================== RESPONSIVE ===================== */
+  @media (max-width: 600px) {
+    .hero { padding: 40px 20px 48px; }
+    .hero-title { font-size: 52px; }
+
+    .pain { padding: 40px 20px; }
+    .pain-grid { grid-template-columns: 1fr; }
+    .pain-resolve { padding: 24px 20px; }
+    .pain-resolve-title { font-size: 28px; white-space: normal; }
+    .pain-resolve-body { font-size: 12px; }
+
+    .services-section { padding: 40px 20px; }
+    .card { padding: 20px 18px 18px; }
+    .card-name { font-size: 16px; }
+    .card-price { font-size: 20px; }
+
+    .flow-section { padding: 40px 20px; }
+    .flow-steps { grid-template-columns: repeat(2, 1fr); }
+    .flow-step:nth-child(2)::after { display: none; }
+    .flow-step { padding: 20px 10px; }
+
+    .cta-section { padding: 48px 20px; }
+    .cta-title { font-size: 28px; }
+    .cta-sub { font-size: 12px; }
+    .cta-btn { padding: 16px 32px; font-size: 13px; }
+
+    .form-header { padding: 24px 20px; }
+    .form-header-title { font-size: 36px; }
+    .form-wrap { padding: 32px 20px 60px; }
+    .form-card { padding: 28px 20px; }
+
+    .section-eyebrow { font-size: 9px; }
+  }
 </style>
 </head>
 <body>
@@ -677,9 +748,8 @@
       <div class="services-grid">
 
         <div class="card">
-          <div class="badge badge-core">Core</div>
           <div class="card-header">
-            <div class="card-name">🎯 オンラインコーチング</div>
+            <div class="card-name">オンラインコーチング <span class="badge badge-core" style="position:static; display:inline-block; vertical-align:middle; font-size:9px; padding:2px 8px; margin-left:6px;">CORE</span></div>
             <div class="card-price">月額 5,000円<small> / 月</small></div>
           </div>
           <div class="limit-box">
@@ -700,7 +770,7 @@
 
         <div class="card">
           <div class="card-header">
-            <div class="card-name">🏃 ゴレイロクリニック</div>
+            <div class="card-name">ゴレイロクリニック</div>
             <div class="card-price">2,000〜3,000円<small> / 回</small></div>
           </div>
           <div class="card-desc">
@@ -716,7 +786,7 @@
 
         <div class="card">
           <div class="card-header">
-            <div class="card-name">💪 パーソナルトレーニング</div>
+            <div class="card-name">パーソナルトレーニング</div>
             <div class="card-price">5,000〜8,000円<small> / 回</small></div>
           </div>
           <div class="card-desc">
@@ -733,7 +803,7 @@
           <div class="watermark"><span>COMING SOON</span></div>
           <div class="badge badge-soon">Coming Soon</div>
           <div class="card-header">
-            <div class="card-name">🤝 オンラインコミュニティ</div>
+            <div class="card-name">オンラインコミュニティ</div>
             <div class="card-price">月額 1,000〜2,000円<small> / 月</small></div>
           </div>
           <div class="card-desc">
@@ -781,7 +851,7 @@
 
   <div class="cta-section">
     <div class="cta-inner">
-      <div class="cta-title">説明だけでも、<span>ぜひ。</span></div>
+      <div class="cta-title">説明だけでも！<br><span>悩み聞かせてください！</span></div>
       <div class="cta-sub">
         ゴレイロサポートの内容・料金・進め方について、<br>
         ZOOMで1対1でお話しします。聞くだけでも大丈夫です。
@@ -842,7 +912,9 @@
       </form>
 
       <div class="success-msg" id="success-msg">
-        <div class="success-icon">✅</div>
+        <div class="success-icon-box">
+          <div class="success-check">✓</div>
+        </div>
         <div class="success-title">申し込み完了！</div>
         <div class="success-body">
           ありがとうございます。<br>
